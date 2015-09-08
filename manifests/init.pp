@@ -149,6 +149,9 @@
 # [*control_exchange*]
 #   (optional) Control exchange.
 #   Defaults to 'trove'.
+# [*use_neutron*]
+#   (optional) Use Neutron
+#   Defaults to true
 #
 # [*cinder_url*]
 #   (optional) URL without the tenant segment.
@@ -181,6 +184,14 @@ class trove(
   $kombu_ssl_keyfile            = undef,
   $kombu_ssl_version            = 'TLSv1',
   $amqp_durable_queues          = false,
+  $qpid_hostname                = 'localhost',
+  $qpid_port                    = '5672',
+  $qpid_username                = 'guest',
+  $qpid_password                = 'guest',
+  $qpid_sasl_mechanisms         = false,
+  $qpid_heartbeat               = 60,
+  $qpid_protocol                = 'tcp',
+  $qpid_tcp_nodelay             = true,
   $database_connection          = 'sqlite:////var/lib/trove/trove.sqlite',
   $database_idle_timeout        = 3600,
   $rpc_backend                  = 'trove.openstack.common.rpc.impl_kombu',
@@ -194,6 +205,7 @@ class trove(
   $package_ensure               = 'present',
   # DEPRECATED PARAMETERS
   $mysql_module                 = undef,
+  $use_neutron                  = true,
 ) {
   include ::trove::params
 
