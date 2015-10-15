@@ -115,9 +115,9 @@
 #
 # [*rpc_backend*]
 #   (optional) The rpc backend implementation to use, can be:
-#     trove.openstack.common.rpc.impl_kombu (for rabbitmq)
-#     trove.openstack.common.rpc.impl_qpid  (for qpid)
-#   Defaults to 'trove.openstack.common.rpc.impl_kombu'
+#     rabbit (for rabbitmq)
+#     qpid  (for qpid)
+#   Defaults to 'rabbit'
 #
 # [*mysql_module*]
 #   (optional) Deprecated. Does nothing.
@@ -149,6 +149,9 @@
 # [*control_exchange*]
 #   (optional) Control exchange.
 #   Defaults to 'trove'.
+# [*use_neutron*]
+#   (optional) Use Neutron
+#   Defaults to true
 #
 # [*cinder_url*]
 #   (optional) URL without the tenant segment.
@@ -222,7 +225,7 @@ class trove(
   $qpid_tcp_nodelay             = true,
   $database_connection          = 'sqlite:////var/lib/trove/trove.sqlite',
   $database_idle_timeout        = 3600,
-  $rpc_backend                  = 'trove.openstack.common.rpc.impl_kombu',
+  $rpc_backend                  = 'rabbit',
   $nova_compute_url             = false,
   $nova_proxy_admin_user        = 'admin',
   $nova_proxy_admin_tenant_name = 'admin',
@@ -240,6 +243,7 @@ class trove(
   $package_ensure               = 'present',
   # DEPRECATED PARAMETERS
   $mysql_module                 = undef,
+  $use_neutron                  = true,
 ) {
   include ::trove::params
 
