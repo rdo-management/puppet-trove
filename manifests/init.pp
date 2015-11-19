@@ -170,6 +170,9 @@
 # [*control_exchange*]
 #   (optional) Control exchange.
 #   Defaults to 'trove'.
+# [*use_neutron*]
+#   (optional) Use Neutron
+#   Defaults to true
 #
 # [*cinder_url*]
 #   (optional) URL without the tenant segment.
@@ -266,6 +269,7 @@ class trove(
   $package_ensure               = 'present',
   # DEPRECATED PARAMETERS
   $mysql_module                 = undef,
+  $use_neutron                  = true,
 ) {
   include ::trove::params
 
